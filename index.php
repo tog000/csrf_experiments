@@ -1,12 +1,12 @@
 <?php
 
-
+include_once("actions.php");
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +14,8 @@
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
 
-	<title>Panel de Control</title>
-
+	<title>Bank System</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,500,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 	<link href="css/style.css" rel="stylesheet">
@@ -24,62 +24,70 @@
 	<!--[if lt IE 9]>
 	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
-  </head>
+	  <![endif]-->
+	</head>
 
-  <body>
-
-	<div class="container">
-	  <div class="header">
-		<ul class="nav nav-pills pull-right">
-		  <li class="active"><a href="./">Balance</a></li>
-		  <li><a href="./">Transfer</a></li>
-		  <li><a href="?logout">Logout</a></li>
-		</ul>
-		<h3 class="text-muted">Bank System</h3>
-	  </div>
-
-	  <div class="row main-form">
-		<div class="col-lg-6">
-			<h3>Agregar link</h3>
-			<form role="form" method="POST">
-				<input type="hidden" name="action" value="add_link"/>
-				<div class="form-group">
-					<label for="form-link">Password/Link</label>
-					<input name="link" type="text" class="form-control" id="form-link" placeholder="Link">
+	<body>
+		<div id="wrap">
+			<div class="container">
+				<div class="header">
+					<ul class="nav nav-pills pull-right">
+						<li class="active"><a href="./">Balance</a></li>
+						<li><a href="transfer.php">Transfer</a></li>
+						<li><a href="?logout">Logout</a></li>
+					</ul>
+					<h3 class="text-muted">Bank System</h3>
+					<div class="pull-left text-muted">
+						You are logged in as <?php echo $_SESSION['name']; ?>
+					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="form-group">
-					<label for="form-nota">Notas</label>
-					<textarea name="nota" id="form-nota" class="form-control" rows="3"></textarea>
+				<hr/>
+				
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<h3>Account Balance</h3>
+						<div class="huge">$<?php echo $funds; ?></div>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="form-max">M&aacute;ximas Descargas</label>
-					<input name="max" type="text" class="form-control" id="form-max" value="1">
-				</div>
-				<div class="form-group">
-					<label for="form-archivo">Archivo</label>
-					<select name="archivo" id="form-archivo" class="form-control">
-						<?php
-							if ($handle = opendir('./'.$REAL_FOLDER)) {
-								while (false !== ($entry = readdir($handle))) {
-									if ($entry != "." && $entry != "..") {
-										echo "<option value=\"$entry\">$entry</option>";
-									}
-								}
+				<br/>
+				<div class="row">
+					<div class="col-lg-12">
+						<h4>Transaction History</h4>
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<tr>
+									<th>#</th>
+									<th>Date</th>
+									<th>From</th>
+									<th>To</th>
+									<th>Amount</th>
+								</tr>
+								<?php
+								$result = mysql_query("SELECT * FROM `transaction` WHERE transaction.from=\"{$_SESSION['account']}\" OR transaction.to=\"{$_SESSION['account']}\" ORDER BY transaction.date");
+								while(($row = mysql_fetch_row($result)) != FALSE){
+									echo "<tr>
+									<td>{$row[0]}</td>
+									<td>{$row[4]}</td>
+									<td>{$row[1]}</td>
+									<td>{$row[2]}</td>
+									<td>{$row[3]}</td>
+								</tr>";
 							}
-						?>
-					</select>
+							?>
+						</table>
+					</div>
 				</div>
-				<button type="submit" class="btn btn-default">Guardar</button>
-			</form>
+			</div>
+		</div> <!-- /container -->
+	</div> <!-- /wrap -->
+
+	<div id="push"></div>
+	<div id="footer">
+		<div class="container">
+			<p>&copy; Software Security 2014</p>
 		</div>
-	  </div>
-
-	  <div class="footer">
-		<p>&copy; Jorge Trisca 2014</p>
-	  </div>
-
-	</div> <!-- /container -->
+	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -92,5 +100,5 @@
 		});
 	</script>
 
-  </body>
+</body>
 </html>

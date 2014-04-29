@@ -1,3 +1,23 @@
-.container{
-	max-width:550px;
+html, body {
+	height: 100%;
+	font-family:'Roboto';
 }
+
+#wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	/* Negative indent footer by it's height */
+	margin: 0 auto -60px;
+	padding-bottom:30px;
+}
+
+.container{
+	max-width:650px;
+}
+
+#footer,#push{height:30px;}
+
+.login{max-width:300px;margin-top:200px;border:1px solid #bbb;padding:10px;background-color:#eee;}
+.huge{font-size:100px;font-weight:100;}
+.mini-date{font-size:9px;}
