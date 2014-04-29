@@ -30,7 +30,7 @@
 		$funds = mysql_fetch_row($funds)[3];
 	}
 
-	$request = $_REQUEST;
+	$request = $_POST;
 
 	// Start processing actions
 	if(isset($request['action'])){

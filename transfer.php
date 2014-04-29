@@ -16,6 +16,7 @@ include_once("actions.php");
 
 	<title>Panel de Control</title>
 
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,500,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 	<link href="css/style.css" rel="stylesheet">
@@ -93,7 +94,7 @@ include_once("actions.php");
 	<div id="push"></div>
 	<div id="footer">
 		<div class="container">
-			<p>&copy; Software Security 2014</p>
+			&copy; Boise State University &mdash; Software Security 2014
 		</div>
 	</div>
 

