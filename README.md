@@ -3,6 +3,8 @@ Cross-Site Request Forgery
 
 Experiments showing uses and mitigation techniques for Cross-Site Request Forgeries
 
+Link to live payloads: http://tog000.github.io/
+
 #Test 1:
 
 
