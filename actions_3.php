@@ -39,6 +39,7 @@
 		$uri = $_SERVER["HTTP_HOST"];
 
 		if( preg_match("/http(.?):\/\/".$uri."(\/)?(.*)/", $referer) == FALSE){
+			$error_message = "Security Error";
 			return;
 		}
 

@@ -41,11 +41,15 @@
 		$uri = $_SERVER["HTTP_HOST"];
 
 		if( preg_match("/http(.?):\/\/".$uri."(\/)?(.*)/", $referer) == FALSE){
+			$error_message = "Security Error = Origin";
+			generateToken();
 			return;
 		}
 
 		// Use a token on every request
 		if($request['token'] != $_SESSION['token']){
+			$error_message = "Security Error = Token";
+			generateToken();
 			return;
 		}
 
