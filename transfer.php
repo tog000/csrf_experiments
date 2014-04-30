@@ -1,6 +1,6 @@
 <?php
 
-include_once("actions.php");
+include_once("config.php");
 
 ?>
 
@@ -62,6 +62,7 @@ include_once("actions.php");
 						<h3>Transfer Funds</h3>
 						<form role="form" method="POST">
 							<input type="hidden" name="action" value="transfer"/>
+							<?php include('token.php');?>
 							<div class="form-group">
 								<label for="form-from">From Your Account</label>
 								<input disabled type="text" class="form-control" id="form-from" value="<?php echo $_SESSION['account']; ?>">

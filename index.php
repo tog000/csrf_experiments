@@ -1,6 +1,6 @@
 <?php
 
-include_once("actions.php");
+include_once("config.php");
 
 ?>
 

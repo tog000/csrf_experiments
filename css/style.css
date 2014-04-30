@@ -24,3 +24,6 @@ html, body {
 .login{max-width:300px;margin-top:200px;border:1px solid #bbb;padding:10px;background-color:#eee;}
 .huge{font-size:100px;font-weight:100;}
 .mini-date{font-size:9px;}
+
+.token{font-size:11px;display:block;float:left;margin:5px 5px;padding:5px;background-color:#eee;}
+/**.token{display:none;}/**/

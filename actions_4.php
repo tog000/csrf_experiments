@@ -2,9 +2,12 @@
 	
 	session_start();
 
+	global $USE_TOKEN;
+	$USE_TOKEN = TRUE;
+
 	$error_message = "";
 	$success_message = "";
-	
+
 	if(isset($_GET['logout'])){
 		$_SESSION['logged'] = FALSE;
 		unset($_SESSION['logged']);
@@ -28,10 +31,27 @@
 		$funds = mysql_fetch_row($funds)[3];
 	}
 
-	$request = $_REQUEST;
+	$request = $_POST;
 
 	// Start processing actions
 	if(isset($request['action'])){
+
+		// Lets check the referer
+		$referer = $_SERVER["HTTP_REFERER"];
+		$uri = $_SERVER["HTTP_HOST"];
+
+		if( preg_match("/http(.?):\/\/".$uri."(\/)?(.*)/", $referer) == FALSE){
+			return;
+		}
+
+		// Use a token on every request
+		if($request['token'] != $_SESSION['token']){
+			return;
+		}
+
+		// Generate new token
+		generateToken();
+
 
 		if($request['action']=="login"){
 
@@ -53,6 +73,9 @@
 				$row = mysql_fetch_row($result);
 
 				$_SESSION['name'] = $row[2];
+
+				// Generate new token
+				generateToken();
 
 			}else{
 				include("login.php");
@@ -88,5 +111,11 @@
 
 		}
 	}
-	
+
+	function generateToken(){
+		$_SESSION['token'] = md5(hexdec(bin2hex(openssl_random_pseudo_bytes(4))));
+	}
+
+	echo "<span class=\"token\">Token: {$_SESSION['token']}</span>";
+
 ?>

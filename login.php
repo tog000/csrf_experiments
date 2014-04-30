@@ -27,6 +27,7 @@
 
 		<form role="form" action="<?php echo $_SERVER['REQUEST_URI'];?>" method="POST">
 			<input type="hidden" name="action" value="login"/>
+			<?php include_once('token.php'); ?>
 			<div class="form-group">
 				<label for="user">User</label>
 				<input type="text" name="user" class="form-control" id="user" placeholder="User">

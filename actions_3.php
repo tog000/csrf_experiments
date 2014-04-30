@@ -4,7 +4,7 @@
 
 	$error_message = "";
 	$success_message = "";
-	
+
 	if(isset($_GET['logout'])){
 		$_SESSION['logged'] = FALSE;
 		unset($_SESSION['logged']);
@@ -28,10 +28,19 @@
 		$funds = mysql_fetch_row($funds)[3];
 	}
 
-	$request = $_REQUEST;
+	$request = $_POST;
 
 	// Start processing actions
 	if(isset($request['action'])){
+
+
+		// Lets check the referer
+		$referer = $_SERVER["HTTP_REFERER"];
+		$uri = $_SERVER["HTTP_HOST"];
+
+		if( preg_match("/http(.?):\/\/".$uri."(\/)?(.*)/", $referer) == FALSE){
+			return;
+		}
 
 		if($request['action']=="login"){
 
