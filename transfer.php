@@ -14,7 +14,7 @@ include_once("config.php");
 	<meta name="author" content="">
 	<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
 
-	<title>Panel de Control</title>
+	<title>Bank System</title>
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,500,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
